@@ -75,7 +75,13 @@ public class JoiseJupleAdapters {
       while (it.hasNext()) {
         Entry<String, Object> e = it.next();
         out.beginList();
-        out.name(e.getKey()).value(e.getValue().toString());
+        out.name(e.getKey());
+        Object value = e.getValue();
+        if (value == null) {
+          out.value((String) null);
+        } else {
+          out.value(e.getValue().toString());
+        }
         out.endList();
       }
     }
