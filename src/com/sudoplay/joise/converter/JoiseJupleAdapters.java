@@ -80,7 +80,7 @@ public class JoiseJupleAdapters {
         if (value == null) {
           out.value((String) null);
         } else {
-          out.value(e.getValue().toString());
+          out.value(value.toString());
         }
         out.endList();
       }
