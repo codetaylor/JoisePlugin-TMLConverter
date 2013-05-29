@@ -26,6 +26,7 @@ import com.sudoplay.juple.classparser.adapters.TMLTypeAdapter;
 import com.sudoplay.juple.classparser.adapters.TMLTypeAdapterFactory;
 import com.sudoplay.juple.classparser.adapters.TMLTypeAdapters;
 import com.sudoplay.juple.stream.TMLReader;
+import com.sudoplay.juple.stream.TMLToken;
 import com.sudoplay.juple.stream.TMLWriter;
 
 public class JoiseJupleAdapters {
@@ -94,7 +95,13 @@ public class JoiseJupleAdapters {
       while (in.hasNextInScope(scope)) {
         in.beginList();
         String key = in.nextName();
-        String value = in.nextString();
+        TMLToken p = in.peek();
+        String value = null;
+        if (p == TMLToken.NULL) {
+          in.nextNull();
+        } else {
+          value = in.nextString();
+        }
         in.endList();
         props.put(key, value);
       }
